@@ -1,0 +1,109 @@
+<?php include VIEW_PATH.'/head.phtml'; ?>
+		<div class="pic_ad">
+			<?php 
+				foreach($ad_pic as $k=>$v){
+					if(($v['end_time']>time())&&!empty($v['path'])){
+						$path=$v['path'];
+					}else{
+						$path="/asset/img/default_index_top_ad_pic.gif";
+					}
+					if($v['url']){
+						$url=$v['url'];
+					}else{
+						$url='javascript:void(0)';
+					}
+					
+					$ad_pic_html.='<a target="_blank" href="'.$url.'"><img src="'.$path.'"></a>';
+				}
+				echo $ad_pic_html;
+			?>
+			<div class="clear"></div>
+		</div>
+		<div class="filters">
+			<div class="filter">
+				<ul>
+					<li class="f_n">地区:</li>
+					<?php 
+						foreach ($labels as $k=>$v){
+							if($v['type']==1){
+								if(!empty($get_labels)){
+									$select='';
+									foreach ($get_labels as $k2=>$v2){
+										if($v['lid']==$v2){
+											$select=' f_d_select';
+										}
+									}
+								}
+								$labels_area_html.="<li data-id='{$v['lid']}' class='f_d{$select}'>{$v['lname']}</li>";
+							}
+						}
+						echo $labels_area_html;
+					?>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			<div class="filter">
+				<ul>
+					<li class="f_n">地区:</li>
+					<?php 
+						foreach ($labels as $k=>$v){
+							if($v['type']==2){
+								if(!empty($get_labels)){
+									$select='';
+									foreach ($get_labels as $k2=>$v2){
+										if($v['lid']==$v2){
+											$select=' f_d_select';
+										}
+									}
+								}
+								$labels_cate_html.="<li data-id='{$v['lid']}' class='f_d{$select}'>{$v['lname']}</li>";
+							}
+							
+						}
+						echo $labels_cate_html;
+					?>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="info_container">
+			<div class="publish_btn">
+				<p>想贴就贴,非常简单</p>
+				<a href="/Publish/index">+我要发布+</a>
+			</div>
+			<?php 
+				foreach ($p_rs as $k=>$v){
+					$pic_a=$v['pic']?'<a target="_blank" class="see_pic" href="'.$v['pic'].'">图片</a>':'';
+					
+					$p_r_html.='<div class="p_r">
+									<p> #'.$v['id'].'# '.tz_substr($v['content'],80).$pic_a.'</p>
+									<p>'.'</p>
+									<p>有效:'.date('Y-m-d',$v['create_time']).'至'.date('Y-m-d',$v['end_time']).'</p>
+								</div>';
+				}
+				echo $p_r_html;
+			?>
+			<?php 
+				foreach ($p_ns as $k=>$v){
+					$pic_a=$v['pic']?'<a target="_blank" class="see_pic" href="'.$v['pic'].'">图片</a>':'';
+					
+					$p_n_html.='<div class="p_n">
+									<p> #'.$v['id'].'# '.tz_substr($v['content'],80).$pic_a.'</p>
+									<p>'.'<!--span>级索</span--!></p>
+									<p>有效:'.date('Y-m-d',$v['create_time']).'至'.date('Y-m-d',$v['end_time']).'</p>
+								</div>';
+				}
+				echo $p_n_html;
+			?>
+		</div>
+		<div class="clear"></div>
+		<div class="index_page">
+			<div class="page pre<?php if($pre_url=='javascript:void(0);'){echo ' diabled_page';}?>">
+				<a href="<?php echo $pre_url; ?>">上一页</a>
+			</div>
+			<div class="page next<?php if($next_url=='javascript:void(0);'){echo ' diabled_page';}?>">
+				<a href="<?php echo $next_url; ?>">下一页</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+<?php include VIEW_PATH . '/foot.phtml'; ?>

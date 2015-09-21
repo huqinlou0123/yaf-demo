@@ -1,0 +1,48 @@
+<?php include VIEW_PATH . '/head.phtml'; ?>
+		<form class="publish_form" action="/Publish/save" method='post' enctype="multipart/form-data">
+			<label><span>有效时间:</span>
+				<select name="end_time">
+					<option value="2d">2天</option>
+					<option value="2w" selected>2周</option>
+					<option value="2m">2月</option>
+					<option value="1y">1年</option>
+				</select>
+			</label>
+			<label><span>上传图片:</span>
+				<input name="pic" type="file"> *可选
+			</label>
+			<label><span>内容:</span>
+				<textarea name="content"></textarea>
+				<em class="content_words_tips">内容还可输入80字</em>
+				<input type="hidden" name="labels" />
+			</label>
+			<label>
+				<span>验证码:</span>
+				<input type="text" name="verify_code">
+				<img class="verifyimg" alt="点击切换" src="/Publish/verify">
+			</label>
+			<div class="labels_container"><span>选几个分类，方便别人查找:</span>
+				<div class="labels">
+					<?php 
+						foreach ($labels as $k=>$v){
+							if($v['type']==1){
+								$labels_area_html.="<p data-id='{$v['lid']}'>{$v['lname']}</p>";
+							}
+						}
+						echo $labels_area_html;
+					?>
+					<hr><hr>
+					<?php 
+						foreach ($labels as $k=>$v){
+							if($v['type']==2){
+								$labels_cate_html.="<p data-id='{$v['lid']}'>{$v['lname']}</p>";
+							}
+						}
+						echo $labels_cate_html;
+					?>
+				</div>
+				<input type="hidden" name="labels" />
+			</div>
+			<input type="submit" value="我 贴">
+		</form>
+<?php include VIEW_PATH . '/foot.phtml'; ?>

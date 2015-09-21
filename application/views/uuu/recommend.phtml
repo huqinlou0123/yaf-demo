@@ -1,0 +1,50 @@
+<?php include VIEW_PATH . '/head.phtml'; ?>
+<?php include VIEW_PATH . '/uuu/admin_head.phtml'; ?>		
+		
+		<div class="admin_nav">
+			<a href="/Uuu/recommend">发布推荐</a>
+			<a href="/Uuu/picturead">首页广告图片</a>
+			<a href="/Uuu/loginout">退出</a>
+			<hr>
+		</div>
+		<table class="admin_list_table"> 
+		    <tr>
+		    	<th>ID</th> 
+		        <th>内容</th> 
+		        <th>发布时间</th>
+		        <th>结束时间</th>
+		        <th>是否推荐</th>
+		        <th>操作</th>
+		    </tr>
+		    <?php
+		    	if(!empty($infos)){
+		    		foreach ($infos as $k =>$v){
+		    			if($v['recommend']==1){
+		    				$v['recommend']='<span class="red">是</span>';
+		    			}else{
+		    				$v['recommend']='否';
+		    			}
+						$html.='<tr>
+									<td>'.$v['id'].'</td>
+							        <td title="'.$v['content'].'">'.tz_substr($v['content'],35).'</td>
+							        <td class="text_center">'.date('Y-m-d',$v['create_time']).'</td>
+							        <td class="text_center">'.date('Y-m-d',$v['end_time']).'</td>
+							        <td class="text_center">'.$v['recommend'].'</td>
+							        <td class="text_center rec_control">
+							        	<input type="text" name="end_time" />天
+							        	<input data-id="'.$v['id'].'" class="rec_btn" type="button" value="推荐" />
+										<input data-id="'.$v['id'].'" class="cancel_rec_btn" type="button" value="取消推荐" />
+							        	<input data-id="'.$v['id'].'" class="del_btn" type="button" class="delete" value="删除" />
+							        </td>
+							    </tr>';
+					}
+					echo $html;
+		    	}
+		    ?>
+		</table>
+		<div class="admin_page"><?php echo $page; ?></div>
+		
+		
+		
+		
+<?php include VIEW_PATH . '/uuu/admin_foot.phtml'; ?>

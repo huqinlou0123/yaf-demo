@@ -1,0 +1,47 @@
+/*推荐管理*/
+.admin_nav{margin:2em auto;width:80%;}
+.admin_nav a{display:inline-block;padding:4px 8px;margin:0 6px;background:#2ecc71;color:#fff;}
+.admin_list_table{width:90%;margin:1em auto;border:1px solid #ccc;}
+.admin_list_table tr{background:#f0f0f0;border:1px solid green;}
+.admin_list_table tr:hover{background:#2ecc71;color:#fff;}
+.admin_list_table td,.admin_list_table th{padding:5px;}
+.text_center{text-align:center;}
+.rec_control input{padding:3px 5px;}
+.rec_control input[type=text]{width:50px;}
+.rec_control input[type=button]{color:#333;}
+.red{font-weight:bold;color:red;}
+.rec_control .delete{margin-left:10px;}
+/*分页*/
+.admin_page{width:90%;margin:2em auto;}
+.admin_page strong,.admin_page span,.admin_page a{
+	padding:0 8px;
+	display:inline-block;
+	font-size:1.1em;
+	line-height:1.5em;
+	color:#999;
+}
+.admin_page a{background:#2ecc71;color:#fff;	}
+
+/*广告图片管理*/
+.admin_list_table .up_ad_pic{margin-right:20px;}
+.admin_list_table form{display:inline-block;}
+.admin_tip{width:90%;margin:1em auto;}
+.admin_list_table .ad_pic{width:200px;height:60px;}
+.admin_list_table .save_url input[type=text]{
+	padding:3px 5px;
+	width:100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

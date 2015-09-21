@@ -1,0 +1,54 @@
+<?php include VIEW_PATH . '/head.phtml'; ?>
+<?php include VIEW_PATH . '/uuu/admin_head.phtml'; ?>
+		<div class="admin_nav">
+			<a href="/Uuu/recommend">发布推荐</a>
+			<a href="/Uuu/picturead">首页广告图片</a>
+			<a href="/Uuu/loginout">退出</a>
+			<hr>
+		</div>
+		<p class="admin_tip">提示：为避免图片失真，请上传长高比为200：60的图片</p>
+		<table class="admin_list_table"> 
+		    <tr>
+		    	<th>位置</th>
+		        <th>当前内容</th>
+		        <th>过期时间</th>
+		        <th>链接</th>
+		        <th>操作</th>
+		    </tr>
+		    <?php
+			    foreach ($datas as $k=>$v){
+			    	if(empty($v['path'])){
+			    		$v['path']='/asset/img/default_index_top_ad_pic.gif';
+			    	}
+			    	if(!empty($v['end_time'])){
+			    		if($v['end_time']<time()){
+			    			$v['end_time']='<span class="red">已过期</span>';
+			    		}else{
+			    			$v['end_time']=date('Y-m-d',$v['end_time']);
+			    		}
+			    	}else{
+			    		$v['end_time']='无';
+			    	}
+					$html.='<tr>
+								<td>'.$v['id'].'</td>
+						        <td><img class="ad_pic" src="'.$v['path'].'" /></td>
+						        <td class="text_center">'.$v['end_time'].'</td>
+			    				<td class="text_center save_url">
+			    					<input type="text" value="'.$v['url'].'">
+						        	<input data-id="'.$v['id'].'" class="save_url_btn" type="button" value="保存">
+			    				</td>
+						        <td class="text_center rec_control">
+			    					<form action="/Uuu/save_pic_ad" id="'.$v['id'].'" method="post" enctype="multipart/form-data">
+			    						<input type="hidden" name="id" value="'.$v['id'].'" />
+						        		<input name="ad_pic" data-id="'.$v['id'].'" class="ad_pic_up" type="file">
+			    					</form>
+						        	<input type="text" name="pic_end_time">天
+						        	<input data-id="'.$v['id'].'" class="pic_rec_btn" type="button" value="推荐">
+									<input data-id="'.$v['id'].'" class="use_default" type="button" value="恢复默认">
+						        </td>
+						    </tr>';
+				}
+				echo $html;
+		    ?>
+		</table>
+<?php include VIEW_PATH . '/uuu/admin_foot.phtml'; ?>
